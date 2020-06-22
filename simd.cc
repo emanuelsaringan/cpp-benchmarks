@@ -5,13 +5,13 @@ CPU Caches:
   L1 Instruction 32 KiB (x2)
   L2 Unified 256 KiB (x2)
   L3 Unified 3072 KiB (x1)
-Load Average: 0.59, 0.69, 0.38
+Load Average: 0.85, 0.85, 0.56
 ***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
 -------------------------------------------------------------------
 Benchmark                         Time             CPU   Iterations
 -------------------------------------------------------------------
-TestSumFixture/TestBasic       1348 ns         1348 ns       517841
-TestSumFixture/TestSIMD        1108 ns         1108 ns       648085
+TestSumFixture/TestBasic        719 ns          718 ns       908860
+TestSumFixture/TestSIMD         551 ns          551 ns      1346390
 */
 
 #include <cassert>
@@ -26,8 +26,8 @@ class TestSumFixture : public benchmark::Fixture {
 public:
   void SetUp(const benchmark::State&) override {
     for (size_t i = 0; i < kLen; ++i) {
-      u_[i] = rand_double();
-      v_[i] = rand_double();
+      u_[i] = rand_float();
+      v_[i] = rand_float();
     }
   }
   void TearDown(const benchmark::State&) override {
@@ -36,14 +36,14 @@ public:
     }
   }
 protected:
-  double u_[kLen];
-  double v_[kLen];
-  double result_[kLen];
+  float u_[kLen];
+  float v_[kLen];
+  float result_[kLen];
 private:
-  double rand_double() const {
-    constexpr auto min_val = -256.0;
-    constexpr auto max_val = 256.0;
-    const auto mult = static_cast<double>(rand()) / RAND_MAX;
+  float rand_float() const {
+    constexpr auto min_val = -256.0f;
+    constexpr auto max_val = 256.0f;
+    const auto mult = static_cast<float>(rand()) / RAND_MAX;
     return min_val + mult * (max_val - min_val);
   }
 };
@@ -57,13 +57,12 @@ BENCHMARK_F(TestSumFixture, TestBasic)(benchmark::State& state) {
 }
 
 BENCHMARK_F(TestSumFixture, TestSIMD)(benchmark::State& state) {
-  constexpr size_t jump = sizeof(__m256d) / sizeof(double);
+  constexpr size_t jump = sizeof(__m256) / sizeof(float);
   for (auto _ : state) {
     for (size_t i = 0; i < kLen; i += jump) {
-      const __m256d* uu = reinterpret_cast<__m256d*>(&u_[i]);
-      const __m256d* vv = reinterpret_cast<__m256d*>(&v_[i]);
-      const __m256d sum = _mm256_add_pd(*uu, *vv);
-      *reinterpret_cast<__m256d*>(&result_[i]) = sum;
+      const __m256* uu = reinterpret_cast<__m256*>(&u_[i]);
+      const __m256* vv = reinterpret_cast<__m256*>(&v_[i]);
+      *reinterpret_cast<__m256*>(&result_[i]) = _mm256_add_ps(*uu, *vv);
     }
   }
 }
