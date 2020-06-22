@@ -10,5 +10,6 @@ if(COMPILER_SUPPORTS_MARCH_NATIVE)
 endif()
 
 add_subdirectory("${CMAKE_SOURCE_DIR}/google_benchmark")
+
 add_executable(simd simd.cc)
 target_link_libraries(simd benchmark::benchmark)

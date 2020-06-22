@@ -5,14 +5,15 @@ CPU Caches:
   L1 Instruction 32 KiB (x2)
   L2 Unified 256 KiB (x2)
   L3 Unified 3072 KiB (x1)
-Load Average: 1.62, 1.09, 0.92
+Load Average: 0.59, 0.69, 0.38
 ***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
 -------------------------------------------------------------------
 Benchmark                         Time             CPU   Iterations
 -------------------------------------------------------------------
-TestSumFixture/TestBasic       1361 ns         1361 ns       506303
-TestSumFixture/TestSIMD        2800 ns         2800 ns       250728
+TestSumFixture/TestBasic       1348 ns         1348 ns       517841
+TestSumFixture/TestSIMD        1108 ns         1108 ns       648085
 */
+
 #include <cassert>
 #include <cstring>
 #include <immintrin.h>
@@ -62,7 +63,7 @@ BENCHMARK_F(TestSumFixture, TestSIMD)(benchmark::State& state) {
       const __m256d* uu = reinterpret_cast<__m256d*>(&u_[i]);
       const __m256d* vv = reinterpret_cast<__m256d*>(&v_[i]);
       const __m256d sum = _mm256_add_pd(*uu, *vv);
-      std::memcpy(&result_[i], &sum, sizeof(sum));
+      *reinterpret_cast<__m256d*>(&result_[i]) = sum;
     }
   }
 }
