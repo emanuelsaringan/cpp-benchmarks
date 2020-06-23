@@ -13,3 +13,6 @@ add_subdirectory("${CMAKE_SOURCE_DIR}/google_benchmark")
 
 add_executable(simd simd.cc)
 target_link_libraries(simd benchmark::benchmark)
+
+add_executable(branch_prediction branch_prediction.cc)
+target_link_libraries(branch_prediction benchmark::benchmark)
