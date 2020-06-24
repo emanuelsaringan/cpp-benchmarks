@@ -16,3 +16,6 @@ target_link_libraries(simd benchmark::benchmark)
 
 add_executable(branch_prediction branch_prediction.cc)
 target_link_libraries(branch_prediction benchmark::benchmark)
+
+add_executable(atomic atomic.cc)
+target_link_libraries(atomic benchmark::benchmark)
