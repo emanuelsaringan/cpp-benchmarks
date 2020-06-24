@@ -14,7 +14,6 @@ TestSumFixture/TestBasic        719 ns          718 ns       908860
 TestSumFixture/TestSIMD         551 ns          551 ns      1346390
 */
 
-#include <cassert>
 #include <cstring>
 #include <exception>
 #include <iostream>

@@ -19,3 +19,6 @@ target_link_libraries(branch_prediction benchmark::benchmark)
 
 add_executable(atomic atomic.cc)
 target_link_libraries(atomic benchmark::benchmark)
+
+add_executable(short_string_optimization short_string_optimization.cc)
+target_link_libraries(short_string_optimization benchmark::benchmark)
