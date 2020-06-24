@@ -16,9 +16,12 @@ TestSumFixture/TestSIMD         551 ns          551 ns      1346390
 
 #include <cassert>
 #include <cstring>
+#include <exception>
+#include <iostream>
 #include <immintrin.h>
-
 #include <benchmark/benchmark.h>
+
+#define ASSERT(cond) if (not (cond)) { std::cerr << "Assertion error at line: " << __LINE__ << std::endl; std::terminate(); }
 
 static constexpr size_t kLen = 4096;
 
@@ -32,7 +35,7 @@ public:
   }
   void TearDown(const benchmark::State&) override {
     for (size_t i = 0; i < kLen; ++i) {
-      assert(abs(result_[i] - (u_[i] + v_[i])) < 0.000001);
+      ASSERT(abs(result_[i] - (u_[i] + v_[i])) < 0.000001);
     }
   }
 protected:
