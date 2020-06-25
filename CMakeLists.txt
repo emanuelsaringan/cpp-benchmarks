@@ -22,3 +22,6 @@ target_link_libraries(atomic benchmark::benchmark)
 
 add_executable(short_string_optimization short_string_optimization.cc)
 target_link_libraries(short_string_optimization benchmark::benchmark)
+
+add_executable(placement_new placement_new.cc)
+target_link_libraries(placement_new benchmark::benchmark)
