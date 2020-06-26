@@ -25,3 +25,6 @@ target_link_libraries(short_string_optimization benchmark::benchmark)
 
 add_executable(placement_new placement_new.cc)
 target_link_libraries(placement_new benchmark::benchmark)
+
+add_executable(vptr vptr.cc)
+target_link_libraries(vptr benchmark::benchmark)
