@@ -28,3 +28,6 @@ target_link_libraries(placement_new benchmark::benchmark)
 
 add_executable(vptr vptr.cc)
 target_link_libraries(vptr benchmark::benchmark)
+
+add_executable(move move.cc)
+target_link_libraries(move benchmark::benchmark)
