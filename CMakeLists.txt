@@ -31,3 +31,6 @@ target_link_libraries(vptr benchmark::benchmark)
 
 add_executable(move move.cc)
 target_link_libraries(move benchmark::benchmark)
+
+add_executable(matrix_traversal matrix_traversal.cc)
+target_link_libraries(matrix_traversal benchmark::benchmark)
