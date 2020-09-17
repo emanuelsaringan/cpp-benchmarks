@@ -34,3 +34,6 @@ target_link_libraries(move benchmark::benchmark)
 
 add_executable(matrix_traversal matrix_traversal.cc)
 target_link_libraries(matrix_traversal benchmark::benchmark)
+
+add_executable(buf_iterator buf_iterator.cc)
+target_link_libraries(buf_iterator benchmark::benchmark)
