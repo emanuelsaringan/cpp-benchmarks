@@ -37,3 +37,6 @@ target_link_libraries(matrix_traversal benchmark::benchmark)
 
 add_executable(buf_iterator buf_iterator.cc)
 target_link_libraries(buf_iterator benchmark::benchmark)
+
+add_executable(qsort qsort.cc)
+target_link_libraries(qsort benchmark::benchmark)

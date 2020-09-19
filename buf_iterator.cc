@@ -15,8 +15,8 @@ BMFixture/UsingBuf        36303 ns        36280 ns        19300
 */
 
 #include <algorithm>
-#include <cstdint>
 #include <benchmark/benchmark.h>
+#include <cstdint>
 #include <iterator>
 #include <sstream>
 #include <string>
