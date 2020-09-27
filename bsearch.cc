@@ -47,11 +47,10 @@ BENCHMARK_F(BMFixture, TestBinarySearch)(benchmark::State& state) {
 }
 
 BENCHMARK_F(BMFixture, TestBsearch)(benchmark::State& state) {
-  assert(m_nums.size() > 0);
+  ASSERT(m_nums.size() > 0);
   for (auto _ : state) {
-    void* result = ::bsearch(
-        &m_key, &m_nums[0], m_nums.size(), sizeof(decltype(m_nums)::value_type), util::cmp<uint16_t>);
-    ASSERT(*((decltype(m_key)*) result) == m_key);
+    void* r = ::bsearch(&m_key, &m_nums[0], m_nums.size(), sizeof(decltype(m_nums)::value_type), util::cmp<uint16_t>);
+    ASSERT(*((decltype(m_key)*) r) == m_key);
   }
 }
 

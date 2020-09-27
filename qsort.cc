@@ -42,7 +42,7 @@ BENCHMARK_F(BMFixture, TestSort)(benchmark::State& state) {
 }
 
 BENCHMARK_F(BMFixture, TestQsort)(benchmark::State& state) {
-  assert(m_nums.size() > 0);
+  ASSERT(m_nums.size() > 0);
   for (auto _ : state) {
     ::qsort(&m_nums[0], m_nums.size(), sizeof(decltype(m_nums)::value_type), util::cmp<uint16_t>);
   }
