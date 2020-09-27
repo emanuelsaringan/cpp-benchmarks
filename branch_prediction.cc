@@ -19,8 +19,7 @@ BM_TestWithExpect      28334 ns        28318 ns        24588
 #include <random>
 #include <vector>
 #include <benchmark/benchmark.h>
-
-#define LIKELY(x) __builtin_expect(!!(x), 1)
+#include "benchmark_util.h"
 
 static constexpr uint32_t kLen = 16u * 1024u;
 

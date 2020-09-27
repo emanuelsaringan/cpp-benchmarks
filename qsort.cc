@@ -21,12 +21,11 @@ BMFixture/TestQsort       2725 ns         2719 ns       260899
 #include <random>
 #include <vector>
 #include <stdlib.h>
+#include "benchmark_util.h"
 
 class BMFixture : public benchmark::Fixture {
  public:
-  enum : uint16_t {
-    c_size = 100u
-  };
+  enum : uint16_t { c_size = 100u };
  public:
   BMFixture() : m_nums(c_size) {
     std::iota(m_nums.begin(), m_nums.end(), 0u);
@@ -42,20 +41,10 @@ BENCHMARK_F(BMFixture, TestSort)(benchmark::State& state) {
   }
 }
 
-int uint16_cmp(const void* a, const void* b) {
-  auto aa = *(uint16_t*)a;
-  auto bb = *(uint16_t*)b;
-  if (aa < bb) {
-    return -1;
-  } else if (aa > bb) {
-    return 1;
-  }
-  return 0;
-}
-
 BENCHMARK_F(BMFixture, TestQsort)(benchmark::State& state) {
+  assert(m_nums.size() > 0);
   for (auto _ : state) {
-    ::qsort(&m_nums[0], m_nums.size(), sizeof(decltype(m_nums)::value_type), uint16_cmp);
+    ::qsort(&m_nums[0], m_nums.size(), sizeof(decltype(m_nums)::value_type), util::cmp<uint16_t>);
   }
 }
 

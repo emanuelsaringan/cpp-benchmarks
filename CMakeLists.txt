@@ -40,3 +40,6 @@ target_link_libraries(buf_iterator benchmark::benchmark)
 
 add_executable(qsort qsort.cc)
 target_link_libraries(qsort benchmark::benchmark)
+
+add_executable(bsearch bsearch.cc)
+target_link_libraries(bsearch benchmark::benchmark)
