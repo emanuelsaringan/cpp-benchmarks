@@ -43,3 +43,6 @@ target_link_libraries(qsort benchmark::benchmark)
 
 add_executable(bsearch bsearch.cc)
 target_link_libraries(bsearch benchmark::benchmark)
+
+add_executable(crtp crtp.cc)
+target_link_libraries(crtp benchmark::benchmark)
